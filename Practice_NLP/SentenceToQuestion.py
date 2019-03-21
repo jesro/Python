@@ -114,38 +114,7 @@ from textacy.spacier import utils
                         ques = 'Does ' + str(sentence).replace(root.text,root.lemma_) + '?'
                     elif root.tag_ == 'VBD' or str(utils.get_subjects_of_verb(root)[0]).upper() in ['I', 'You', 'We','They', 'He', 'She','It'] or label == "PERSON":
                         ques = 'Did ' + str(sentence).replace(root.text,root.lemma_) + '?'
-            elif root.lemma_ == 'need':
-                if label in ["QUANTITY","MONEY","CARDINAL"] and utils.get_objects_of_verb(root)[0].dep_ in ['pobj','dobj']:
-                    for child in utils.get_objects_of_verb(root)[0].children:
-                        if child.tag_ in ['CD','#']:
-                            if root.tag_ == 'VBD' or str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They','He','She','It']:
-                                ques = 'How many did '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                            elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They']:
-                                ques = 'How many do '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                            elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['He','She','It'] or label == "PERSON":
-                                ques = 'How many does '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                elif label in ["QUANTITY","MONEY","CARDINAL"]:
-                    if root.tag_ == 'VBD' or str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They','He','She','It']:
-                        ques = 'How much did '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They']:
-                        ques = 'How much do '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['He','She','It'] or label == "PERSON":
-                        ques = 'How much does '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                elif label == "TIME":
-                    if root.tag_ == 'VBD' or str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They','He','She','It']:
-                        ques = 'When did '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They']:
-                        ques = 'When do '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['He','She','It'] or label == "PERSON":
-                        ques = 'When does '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                elif label == "GPE":
-                    if root.tag_ == 'VBD' or str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They','He','She','It']:
-                        ques = 'Where did '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They']:
-                        ques = 'Where do '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                    elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['He','She','It'] or label == "PERSON":
-                        ques = 'Where does '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
-                else:
+            else:
                     if str(utils.get_subjects_of_verb(root)[0]).upper() in ['I','You','We','They']:
                         ques = 'What do '+str(utils.get_subjects_of_verb(root)[0])+" "+ root.lemma_+'?'
                     elif str(utils.get_subjects_of_verb(root)[0]).upper() in ['He','She','It'] or label == "PERSON":
